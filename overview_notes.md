@@ -32,4 +32,33 @@
 1. MinMaxScaler
 2. StandardScaler
 
-### Test
+## Regression Steps:
+
+### Acquire
+
+- SQL
+  - pd.read_sql()
+  - create connection with custom_module.py
+
+### Prepare
+
+- Null Values
+- Clean Data
+- Scale \*only after Explore\*
+  - MinMaxScaler()
+  - StandardScaler()
+- Outlier
+- Split Data
+
+### Explore
+
+- Ask Questions
+- Build Visualizations
+  > Translate to muggles
+- Statistics
+
+### Model
+
+- Scale Data
+- Feature Engineering
+- Feature Selection
