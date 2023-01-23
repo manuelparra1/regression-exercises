@@ -24,6 +24,9 @@ def get_data(sql_db, query):
         Returns DataFrame
     '''
     
+    import os
+    import pandas as pd
+    
     # variable to hold filename created from 
     # input argument of SQL database name
     path = f'{sql_db}.csv'
@@ -59,21 +62,21 @@ def clean_data(df):
     '''
 
     # Drop Nulls
-    df = df.dropna()
+    df = df.dropna().copy()
 
     # Temporarily converts 'fips' column to interger to remove
     # trailing zeroes from current float type
-    df['fips'] = df['fips'].apply(int)
+    df['fips'] = df['fips'].apply(int).copy()
 
     # Converts 'fips' column to string to target data type
-    df['fips'] = df['fips'].apply(str)
+    df['fips'] = df['fips'].apply(str).copy()
 
     # Adds leading 'zero' character to 'fips' column, which
     # is now a string data type
-    df['fips'] = '0' + df['fips']
+    df['fips'] = '0' + df['fips'].copy()
 
     # Converts 'yearbuilt' column to interger
-    df['yearbuilt'] = df['yearbuilt'].apply(int)
+    df['yearbuilt'] = df['yearbuilt'].apply(int).copy()
 
     # Method of removing last 2 strings in all columns
     #df['fips']=df['fips'].str[:-2]
