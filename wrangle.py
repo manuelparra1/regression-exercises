@@ -11,7 +11,7 @@ import sklearn.preprocessing
 
 
 def get_data(sql_db, query):
-    '''
+    """
         Accepts 2 arguments of string type:
         1: SQL database name
         2: SQL query
@@ -22,14 +22,14 @@ def get_data(sql_db, query):
         Saves a .csv file of DataFrame
         
         Returns DataFrame
-    '''
+    """
     
     import os
     import pandas as pd
     
     # variable to hold filename created from 
     # input argument of SQL database name
-    path = f'{sql_db}.csv'
+    path = f"{sql_db}.csv"
     
     # Holds boolean result of check for
     # .csv existing; uses OS module
@@ -43,13 +43,13 @@ def get_data(sql_db, query):
     if file_exists:
         df = pd.read_csv(path)
         
-        print('Reading CSV')
+        print("Reading CSV")
         return df
 
     else:
         url = get_db_url(sql_db)
         df = pd.read_sql(query, url)
-        df.to_csv(f'{sql_db}.csv')
+        df.to_csv(f"{sql_db}.csv")
         
         print('Downloading SQL DB')
         return df
@@ -63,7 +63,10 @@ def clean_data(df):
 
     # Drop Nulls
     df = df.dropna().copy()
-
+    
+    # Useless Columns
+    df.drop(columns='Unnamed: 0', inplace=True)
+    
     # Temporarily converts 'fips' column to interger to remove
     # trailing zeroes from current float type
     df['fips'] = df['fips'].apply(int).copy()
